@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /home/karthic/Downloads -maxdepth 1 -iname \"*.mp4\" -o -iname \"*.mov\" -o -iname \"*.webm\" 2>/dev/null; echo \"---\"; ls -la /home/karthic/Downloads | head -50; echo \"---desktop---\"; find /home/karthic/Desktop -maxdepth 2 -iname \"*.mp4\" -o -iname \"*.mov\" -o -iname \"*.webm\" 2>/dev/null)",
+      "Bash(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,duration,codec_name -of default=noprint_wrappers=1 \"/home/karthic/Downloads/pf video.mp4\")",
+      "Bash(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,duration,codec_name -of default=noprint_wrappers=1 \"/home/karthic/Downloads/].mp4\")",
+      "Bash(npx --yes create-next-app@latest . --typescript --eslint --app --no-src-dir --import-alias \"@/*\" --use-npm --no-tailwind --no-turbopack)",
+      "Bash(npx --yes create-next-app@latest /tmp/claude-1000/-home-karthic-Desktop-Portfolio/b8e87b88-599c-484d-b8e2-dfd6a5c6bea9/scratchpad/portfolio-scaffold --typescript --eslint --app --no-src-dir --import-alias \"@/*\" --use-npm --no-tailwind --no-turbopack)",
+      "Bash(npm install *)",
+      "Bash(mkdir -p /home/karthic/Desktop/Portfolio/public/videos *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(sed -i -e 's/var\\(--accent-pink-deep\\), var\\(--accent-pink\\)/var\\(--accent-violet\\), var\\(--accent-cyan\\)/' -e 's/rgba\\(255, 62, 168, 0.6\\)/rgba\\(139, 92, 246, 0.6\\)/' -e 's/var\\(--accent-pink-deep\\);/var\\(--accent-violet\\);/' -e 's/rgba\\(255, 62, 168, 0.45\\)/rgba\\(139, 92, 246, 0.45\\)/' -e 's/rgba\\(255, 62, 168, 0\\)/rgba\\(139, 92, 246, 0\\)/' components/Experience/Experience.module.css)",
+      "Bash(sed -i 's/color: var\\(--accent-pink\\);/color: var\\(--accent-violet\\);/g; s/background: var\\(--accent-pink\\);/background: var\\(--accent-violet\\);/g' components/Experience/Experience.module.css)",
+      "Bash(grep -rn '\"tag\"\\\\|\"section \\\\|sectionLabel\\\\|sectionHeading\\\\|className=\"container\"\\\\|`section ' components/ app/)"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+.dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+}
+
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease,
+    background 0.3s ease, opacity 0.3s ease;
+}
+
+.ringHover {
+  width: 56px;
+  height: 56px;
+  background: rgba(10, 132, 255, 0.12);
+  border-color: var(--accent);
+}
+
+.ringVisible,
+.dotVisible {
+  opacity: 1;
+}
+
+.hideCursor,
+.hideCursor a,
+.hideCursor button {
+  cursor: none !important;
+}
