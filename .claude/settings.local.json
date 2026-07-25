@@ -13,7 +13,12 @@
       "Bash(echo \"EXIT:$?\")",
       "Bash(sed -i -e 's/var\\(--accent-pink-deep\\), var\\(--accent-pink\\)/var\\(--accent-violet\\), var\\(--accent-cyan\\)/' -e 's/rgba\\(255, 62, 168, 0.6\\)/rgba\\(139, 92, 246, 0.6\\)/' -e 's/var\\(--accent-pink-deep\\);/var\\(--accent-violet\\);/' -e 's/rgba\\(255, 62, 168, 0.45\\)/rgba\\(139, 92, 246, 0.45\\)/' -e 's/rgba\\(255, 62, 168, 0\\)/rgba\\(139, 92, 246, 0\\)/' components/Experience/Experience.module.css)",
       "Bash(sed -i 's/color: var\\(--accent-pink\\);/color: var\\(--accent-violet\\);/g; s/background: var\\(--accent-pink\\);/background: var\\(--accent-violet\\);/g' components/Experience/Experience.module.css)",
-      "Bash(grep -rn '\"tag\"\\\\|\"section \\\\|sectionLabel\\\\|sectionHeading\\\\|className=\"container\"\\\\|`section ' components/ app/)"
+      "Bash(grep -rn '\"tag\"\\\\|\"section \\\\|sectionLabel\\\\|sectionHeading\\\\|className=\"container\"\\\\|`section ' components/ app/)",
+      "Bash(git config *)",
+      "Bash(GIT_TERMINAL_PROMPT=0 timeout 15 git push --dry-run origin main)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(git checkout *)",
+      "Bash(git add *)"
     ]
   }
 }

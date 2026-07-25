@@ -1,315 +1,312 @@
-export type Line =
-  | { kind: "blank" }
-  | { kind: "comment"; text: string }
-  | { kind: "heading"; text: string }
-  | { kind: "plain"; text: string }
-  | { kind: "prose"; text: string }
-  | { kind: "kv"; key: string; value: string }
-  | { kind: "listItem"; text: string }
-  | { kind: "log"; timestamp: string; level: string; message: string }
-  | {
-      kind: "command";
-      text: string;
-      action: "mailto" | "tel" | "link";
-      href: string;
-      note?: string;
-    };
+import type { Lang } from "@/lib/highlight";
+
+export interface CommandLine {
+  cmd: string;
+  action: "mailto" | "tel" | "link";
+  href: string;
+  note?: string;
+}
+
+export type FileLine = string | CommandLine;
 
 export interface WorkspaceFile {
   id: string;
   name: string;
   badge: string;
+  lang: Lang;
   folder?: string;
-  lines: Line[];
+  lines: FileLine[];
 }
 
-const GITHUB = "https://github.com/Karthic-45";
-
-function tsProjectLines(p: {
-  category: string;
-  name: string;
-  role: string;
-  stack: string[];
-  highlights: string[];
-}): Line[] {
-  return [
-    { kind: "comment", text: `// ${p.category}` },
-    { kind: "plain", text: "export const project = {" },
-    { kind: "kv", key: "  name", value: `"${p.name}",` },
-    { kind: "kv", key: "  role", value: `"${p.role}",` },
-    {
-      kind: "kv",
-      key: "  stack",
-      value: `[${p.stack.map((s) => `"${s}"`).join(", ")}],`,
-    },
-    { kind: "plain", text: "  highlights: [" },
-    ...p.highlights.map(
-      (h): Line => ({ kind: "listItem", text: `"${h}",` })
-    ),
-    { kind: "plain", text: "  ]," },
-    { kind: "kv", key: "  repo", value: `"github.com/Karthic-45"` },
-    { kind: "plain", text: "};" },
-  ];
-}
+export const EMAIL = "karthicnandakumar4545@gmail.com";
+export const PHONE_DISPLAY = "+91 89400 51266";
+export const PHONE_HREF = "tel:+918940051266";
+export const GITHUB = "https://github.com/Karthic-45";
+export const LINKEDIN = "https://www.linkedin.com/in/karthic45";
 
 export const FILES: WorkspaceFile[] = [
   {
     id: "about",
     name: "about.md",
     badge: "MD",
+    lang: "md",
     lines: [
-      { kind: "heading", text: "# Karthic N" },
-      {
-        kind: "comment",
-        text: "> Backend Developer · Java & Spring Boot · Microservices · Generative AI Systems",
-      },
-      { kind: "blank" },
-      {
-        kind: "prose",
-        text: "I'm a backend developer specializing in Java, Spring Boot, REST APIs, and microservices, with a growing focus on Generative AI integration.",
-      },
-      { kind: "blank" },
-      {
-        kind: "prose",
-        text: "I design RAG-based document intelligence pipelines, secure systems with JWT and role-based access control, and ship production-grade software at the intersection of enterprise engineering and applied LLM technology.",
-      },
-      { kind: "blank" },
-      { kind: "heading", text: "## Quick facts" },
-      { kind: "listItem", text: "Location — Tamil Nadu, India" },
-      { kind: "listItem", text: "Education — B.E. Computer Science, expected 2028" },
-      { kind: "listItem", text: "Role — Technical Lead, College Project Team" },
+      "# Karthic N",
+      "> Backend Developer · Java & Spring Boot · Microservices · Generative AI",
+      "",
+      "I'm a backend developer specializing in **Java**, **Spring Boot**, REST APIs",
+      "and microservices, with a growing focus on Generative AI integration.",
+      "",
+      "I design RAG-based document intelligence pipelines, secure systems with",
+      "`JWT` and role-based access control, and ship production-grade software at",
+      "the intersection of enterprise engineering and applied LLM technology.",
+      "",
+      "## Quick facts",
+      "- Location — Tamil Nadu, India",
+      "- Education — B.E. Computer Science, expected 2028",
+      "- Role — Technical Lead, College Project Team",
+      "- Focus — distributed backends + applied LLMs",
+      "",
+      "## Getting around",
+      "- Open any file in the sidebar, or hit `Cmd/Ctrl + K`",
+      "- Try the terminal below — start with `help` or `neofetch`",
     ],
   },
   {
     id: "skills",
     name: "skills.json",
     badge: "JSON",
+    lang: "json",
     lines: [
-      { kind: "plain", text: "{" },
-      {
-        kind: "kv",
-        key: '  "languages"',
-        value: '["Java", "Python", "SQL", "JavaScript", "HTML", "CSS"],',
-      },
-      {
-        kind: "kv",
-        key: '  "backend"',
-        value:
-          '["Spring Boot", "Spring MVC", "Spring Security", "Spring Data JPA", "Hibernate", "Spring Cloud", "Eureka Server"],',
-      },
-      {
-        kind: "kv",
-        key: '  "ai_genai"',
-        value: '["OpenAI API", "LangChain", "RAG (FAISS)", "OCR", "FastAPI"],',
-      },
-      {
-        kind: "kv",
-        key: '  "databases"',
-        value: '["MySQL", "PostgreSQL", "MongoDB", "Redis"],',
-      },
-      {
-        kind: "kv",
-        key: '  "tools_devops"',
-        value:
-          '["Git", "GitHub Actions", "Maven", "Docker", "Docker Compose", "Postman", "Swagger", "Linux"],',
-      },
-      {
-        kind: "kv",
-        key: '  "cloud_messaging"',
-        value: '["AWS EC2", "AWS S3", "Apache Kafka"],',
-      },
-      {
-        kind: "kv",
-        key: '  "concepts"',
-        value:
-          '["OOP", "Design Patterns", "JWT/RBAC", "API Gateway", "Service Discovery", "Distributed Systems", "CI/CD"]',
-      },
-      { kind: "plain", text: "}" },
+      "{",
+      '  "languages": ["Java", "Python", "SQL", "JavaScript", "HTML", "CSS"],',
+      '  "backend": [',
+      '    "Spring Boot", "Spring MVC", "Spring Security",',
+      '    "Spring Data JPA", "Hibernate", "Spring Cloud", "Eureka Server"',
+      "  ],",
+      '  "ai_genai": ["OpenAI API", "LangChain", "RAG (FAISS)", "OCR", "FastAPI"],',
+      '  "databases": ["MySQL", "PostgreSQL", "MongoDB", "Redis"],',
+      '  "tools_devops": [',
+      '    "Git", "GitHub Actions", "Maven", "Docker",',
+      '    "Docker Compose", "Postman", "Swagger", "Linux"',
+      "  ],",
+      '  "cloud_messaging": ["AWS EC2", "AWS S3", "Apache Kafka"],',
+      '  "concepts": [',
+      '    "OOP", "Design Patterns", "JWT/RBAC", "API Gateway",',
+      '    "Service Discovery", "Distributed Systems", "CI/CD"',
+      "  ]",
+      "}",
     ],
   },
   {
     id: "proj-intelli-credit",
     name: "intelli-credit.ts",
     badge: "TS",
+    lang: "ts",
     folder: "projects",
-    lines: tsProjectLines({
-      category: "GenAI · FinTech",
-      name: "Intelli-Credit",
-      role: "Corporate Credit Decisioning Engine",
-      stack: ["FastAPI", "LangChain", "FAISS", "PostgreSQL", "React", "OCR"],
-      highlights: [
-        "LLM-driven credit appraisal platform automating loan risk assessment across financial documents, GST filings, and bank statements — cutting manual review effort by ~70%.",
-        "FAISS-based RAG pipeline improved document retrieval accuracy by ~60% over keyword search.",
-        "OCR-based document intelligence parsing 50+ scanned financial document types in near real-time.",
-      ],
-    }),
+    lines: [
+      "// GenAI · FinTech",
+      "export const intelliCredit = {",
+      '  name: "Intelli-Credit",',
+      '  tagline: "Corporate Credit Decisioning Engine",',
+      '  stack: ["FastAPI", "LangChain", "FAISS", "PostgreSQL", "React", "OCR"],',
+      "",
+      "  highlights: [",
+      '    "LLM-driven credit appraisal platform automating loan risk assessment',
+      '     across financial documents, GST filings and bank statements —',
+      '     cutting manual review effort by ~70%.",',
+      '    "FAISS-based RAG pipeline improved document retrieval accuracy by',
+      '     ~60% over traditional keyword search.",',
+      '    "OCR document intelligence parsing 50+ scanned financial document',
+      '     types in near real-time.",',
+      '    "Automated Credit Appraisal Memo generation with LLM risk scores —',
+      '     report prep dropped from hours to minutes.",',
+      "  ],",
+      "",
+      "  impact: { manualEffort: -70, retrievalAccuracy: +60, docTypes: 50 },",
+      "};",
+    ],
   },
   {
     id: "proj-secure-agent",
     name: "secure-agent.ts",
     badge: "TS",
+    lang: "ts",
     folder: "projects",
-    lines: tsProjectLines({
-      category: "Security · Platform",
-      name: "SecureAgent",
-      role: "Secure AI Agent Management Platform",
-      stack: ["Java", "Spring Boot", "Spring Security", "JWT", "MySQL"],
-      highlights: [
-        "Production-grade backend for AI agent lifecycle management — registration, activation, monitoring, deactivation at scale.",
-        "Secured 20+ API endpoints with JWT authentication and RBAC via Spring Security — zero unauthorized access incidents in testing.",
-        "Optimized the persistence layer with Spring Data JPA custom queries, improving response time by ~35% under load.",
-      ],
-    }),
+    lines: [
+      "// Security · Platform",
+      "export const secureAgent = {",
+      '  name: "SecureAgent",',
+      '  tagline: "Secure AI Agent Management Platform",',
+      '  stack: ["Java", "Spring Boot", "Spring Security", "JWT", "MySQL"],',
+      "",
+      "  highlights: [",
+      '    "Production-grade backend for AI agent lifecycle management —',
+      '     registration, activation, monitoring and deactivation at scale.",',
+      '    "Secured 20+ API endpoints with JWT auth and RBAC via Spring',
+      '     Security — zero unauthorized access incidents in testing.",',
+      '    "REST APIs following OpenAPI/Swagger standards, cutting frontend',
+      '     integration time by ~40%.",',
+      '    "Audit logging and token validation middleware for end-to-end',
+      '     platform security compliance.",',
+      "  ],",
+      "",
+      "  impact: { endpointsSecured: 20, responseTime: -35, breaches: 0 },",
+      "};",
+    ],
   },
   {
     id: "proj-ecommerce",
     name: "ecommerce-microservices.ts",
     badge: "TS",
+    lang: "ts",
     folder: "projects",
-    lines: tsProjectLines({
-      category: "Microservices",
-      name: "E-Commerce Platform",
-      role: "Decomposed Microservices Architecture",
-      stack: ["Spring Boot", "Spring Cloud", "Docker", "MySQL", "Eureka"],
-      highlights: [
-        "Decomposed a monolithic e-commerce system into independently deployable Product, User, Order, and Payment microservices.",
-        "Centralized API Gateway for routing, load balancing, and request filtering across 4+ services.",
-        "Containerized all services with Docker Compose, cutting environment setup time by ~50%.",
-      ],
-    }),
+    lines: [
+      "// Distributed Systems · Microservices",
+      "export const ecommercePlatform = {",
+      '  name: "E-Commerce Platform",',
+      '  tagline: "Monolith decomposed into deployable services",',
+      '  stack: ["Spring Boot", "Spring Cloud", "Docker", "MySQL", "Eureka"],',
+      "",
+      '  services: ["product", "user", "order", "payment"],',
+      "",
+      "  highlights: [",
+      '    "Decomposed a monolithic e-commerce system into independently',
+      '     deployable microservices using Spring Cloud + Eureka discovery.",',
+      '    "API Gateway for centralized routing, load balancing and request',
+      '     filtering across 4+ services.",',
+      '    "Containerized every service with Docker Compose, cutting',
+      '     environment setup time by ~50%.",',
+      "  ],",
+      "",
+      "  impact: { setupTime: -50, services: 4 },",
+      "};",
+    ],
   },
   {
     id: "proj-autonomous-car",
     name: "autonomous-car.py",
     badge: "PY",
+    lang: "py",
     folder: "projects",
     lines: [
-      { kind: "comment", text: "# IoT · Robotics" },
-      { kind: "plain", text: "class AutonomousCar:" },
-      {
-        kind: "comment",
-        text: '    """Autonomous vehicle prototype — Raspberry Pi + OpenCV."""',
-      },
-      { kind: "blank" },
-      {
-        kind: "kv",
-        key: "    stack",
-        value: '["Raspberry Pi", "Python", "OpenCV", "IoT", "Sensors"]',
-      },
-      { kind: "blank" },
-      { kind: "plain", text: "    def highlights(self):" },
-      { kind: "plain", text: "        return [" },
-      {
-        kind: "listItem",
-        text: '"Combines obstacle detection, real-time lane recognition, and path planning via OpenCV.",',
-      },
-      {
-        kind: "listItem",
-        text: '"Multi-sensor fusion with calibrated low-latency control logic for smooth navigation.",',
-      },
-      {
-        kind: "listItem",
-        text: '"Improved directional accuracy by ~45% through iterative sensor tuning and algorithm refinement.",',
-      },
-      { kind: "plain", text: "        ]" },
-      { kind: "blank" },
-      { kind: "comment", text: "# >>> AutonomousCar().drive()" },
-      { kind: "comment", text: "# Status: en route to the Projects section..." },
+      "# IoT · Robotics · Computer Vision",
+      "",
+      "class AutonomousCar:",
+      '    """Autonomous vehicle prototype — Raspberry Pi + OpenCV."""',
+      "",
+      '    stack = ["Raspberry Pi", "Python", "OpenCV", "IoT", "Sensors"]',
+      "",
+      "    def highlights(self):",
+      "        return [",
+      '            "Obstacle detection, real-time lane recognition and path',
+      '             planning through OpenCV and multi-sensor fusion.",',
+      '            "Calibrated low-latency control logic for smooth navigation.",',
+      '            "Directional accuracy improved ~45% through iterative sensor',
+      '             tuning and algorithm refinement.",',
+      "        ]",
+      "",
+      "    def impact(self):",
+      '        return {"directional_accuracy": 45, "latency": "low"}',
+      "",
+      "",
+      "# >>> AutonomousCar().drive()",
+      "# en route ...",
     ],
   },
   {
     id: "proj-store",
     name: "store-management.ts",
     badge: "TS",
+    lang: "ts",
     folder: "projects",
-    lines: tsProjectLines({
-      category: "Enterprise Backend",
-      name: "Store Management System",
-      role: "Inventory & Sales Backend",
-      stack: ["Java", "Spring Boot", "MySQL"],
-      highlights: [
-        "Inventory, sales, and supplier management backend with REST APIs for real-time stock monitoring.",
-        "Analytical report generation for high-volume inventory operations.",
-        "Streamlined database interactions with Spring Data JPA, reducing average query time by ~25%.",
-      ],
-    }),
+    lines: [
+      "// Enterprise Backend",
+      "export const storeManagement = {",
+      '  name: "Store Management System",',
+      '  tagline: "Inventory, sales and supplier backend",',
+      '  stack: ["Java", "Spring Boot", "MySQL"],',
+      "",
+      "  highlights: [",
+      '    "Inventory, sales and supplier management services with REST APIs',
+      '     for real-time stock monitoring.",',
+      '    "Analytical report generation for high-volume inventory operations.",',
+      '    "Spring Data JPA query tuning reduced average execution time by',
+      '     ~25% on high-volume operations.",',
+      "  ],",
+      "",
+      "  impact: { queryTime: -25 },",
+      "};",
+    ],
   },
   {
     id: "experience",
     name: "experience.log",
     badge: "LOG",
+    lang: "log",
     lines: [
-      { kind: "log", timestamp: "2024-01-01", level: "INFO", message: "role_start: Technical Lead @ College Project Team" },
-      { kind: "log", timestamp: "2024-01-01", level: "INFO", message: "org: Sri Krishna College of Technology, Tamil Nadu" },
-      { kind: "log", timestamp: "2024-03-10", level: "INFO", message: "Led a cross-functional team of 4 developers shipping an LLM-driven credit analysis platform." },
-      { kind: "log", timestamp: "2024-05-22", level: "INFO", message: "Coordinated API design, DB schema planning, and microservices decomposition across all projects." },
-      { kind: "log", timestamp: "2024-08-14", level: "INFO", message: "Established Git-based collaboration workflows and code review standards — delivery speed +30%." },
-      { kind: "log", timestamp: "2024-11-02", level: "INFO", message: "Mentored junior developers on Spring Boot, REST API design, and JWT-based security." },
-      { kind: "log", timestamp: "2028-06-01", level: "WARN", message: "expected_graduation: B.E. Computer Science, CGPA 8.0/10.0 (in progress)" },
+      "[2024-01-08 09:00] INFO  role_start: Technical Lead — College Project Team",
+      "[2024-01-08 09:00] INFO  org: Sri Krishna College of Technology, Tamil Nadu",
+      "[2024-03-10 14:22] INFO  Led a cross-functional team of 4 developers shipping",
+      "                         an LLM-driven credit analysis platform.",
+      "[2024-05-22 11:05] INFO  Coordinated API design, DB schema planning and",
+      "                         microservices decomposition across all projects.",
+      "[2024-08-14 16:40] OK    Git workflows + code review standards established —",
+      "                         team delivery speed improved ~30%.",
+      "[2024-11-02 10:15] INFO  Mentored juniors on Spring Boot, REST design and",
+      "                         JWT-based security.",
+      "[2025-02-19 13:30] OK    5+ backend and GenAI projects shipped to completion.",
+      "",
+      "[2028-06-01 00:00] WARN  expected_graduation: B.E. Computer Science",
+      "                         Sri Krishna College of Technology — CGPA 8.0/10.0",
+      "                         status: in_progress",
     ],
   },
   {
     id: "achievements",
     name: "achievements.yml",
     badge: "YML",
+    lang: "yml",
     lines: [
-      { kind: "plain", text: "metrics:" },
-      { kind: "kv", key: "  credit_analysis_turnaround_reduction", value: "70%" },
-      { kind: "kv", key: "  api_endpoints_secured", value: "20+" },
-      { kind: "kv", key: "  critical_vulnerabilities", value: "0" },
-      { kind: "kv", key: "  projects_shipped", value: "5+" },
-      { kind: "kv", key: "  team_delivery_speed_improvement", value: "30%" },
-      { kind: "blank" },
-      { kind: "plain", text: "notes:" },
-      {
-        kind: "listItem",
-        text: "Applied Generative AI tooling (OpenAI, LangChain, FAISS) inside Java-based enterprise backends.",
-      },
-      {
-        kind: "listItem",
-        text: "Zero critical vulnerabilities across the full test lifecycle on SecureAgent.",
-      },
+      "# measurable outcomes",
+      "metrics:",
+      "  credit_analysis_turnaround_reduction: 70%",
+      "  document_retrieval_accuracy_gain: 60%",
+      "  api_endpoints_secured: 20",
+      "  critical_vulnerabilities: 0",
+      "  projects_shipped: 5",
+      "  team_delivery_speed_improvement: 30%",
+      "  environment_setup_time_reduction: 50%",
+      "",
+      "highlights:",
+      "  - Applied Generative AI tooling (OpenAI, LangChain, FAISS) inside",
+      "    Java-based enterprise backends.",
+      "  - Zero critical vulnerabilities across the full test lifecycle.",
+      "  - Guided a 4-person team with structured Git workflows and reviews.",
     ],
   },
   {
     id: "contact",
     name: "contact.sh",
     badge: "SH",
+    lang: "sh",
     lines: [
-      { kind: "comment", text: "#!/bin/bash" },
-      { kind: "comment", text: "# Let's build something worth shipping." },
-      { kind: "blank" },
-      { kind: "kv", key: "EMAIL=", value: '"karthicnandakumar4545@gmail.com"' },
-      { kind: "kv", key: "PHONE=", value: '"+91 89400 51266"' },
-      { kind: "blank" },
+      "#!/bin/bash",
+      "# Let's build something worth shipping.",
+      "",
+      `EMAIL="${EMAIL}"`,
+      `PHONE="${PHONE_DISPLAY}"`,
+      "",
+      "# click any line below to run it",
       {
-        kind: "command",
-        text: 'open "mailto:$EMAIL"',
+        cmd: 'open "mailto:$EMAIL"',
         action: "mailto",
-        href: "mailto:karthicnandakumar4545@gmail.com",
+        href: `mailto:${EMAIL}`,
         note: "say hello",
       },
       {
-        kind: "command",
-        text: 'open "tel:$PHONE"',
+        cmd: 'open "tel:$PHONE"',
         action: "tel",
-        href: "tel:+918940051266",
+        href: PHONE_HREF,
         note: "give me a call",
       },
       {
-        kind: "command",
-        text: 'open "github.com/Karthic-45"',
+        cmd: 'open "github.com/Karthic-45"',
         action: "link",
         href: GITHUB,
+        note: "code",
       },
       {
-        kind: "command",
-        text: 'open "linkedin.com/in/karthic45"',
+        cmd: 'open "linkedin.com/in/karthic45"',
         action: "link",
-        href: "https://www.linkedin.com/in/karthic45",
+        href: LINKEDIN,
+        note: "connect",
       },
-      { kind: "blank" },
-      { kind: "plain", text: 'echo "Open to backend + GenAI opportunities."' },
+      "",
+      'echo "Open to backend engineering + applied GenAI roles."',
     ],
   },
 ];
+
+export const getFile = (id: string): WorkspaceFile =>
+  FILES.find((f) => f.id === id) ?? FILES[0];
