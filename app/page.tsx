@@ -1,14 +1,18 @@
 import VideoIntro from "@/components/VideoIntro/VideoIntro";
-import Workspace from "@/components/Workspace/Workspace";
+import SystemPortfolio from "@/components/system/SystemPortfolio";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <>
+      <a className="skipLink" href="#main">
+        Skip to content
+      </a>
+      {/* VideoIntro is intentionally left untouched. */}
       <VideoIntro />
-      <div className={styles.content}>
-        <Workspace />
+      <div className={styles.system}>
+        <SystemPortfolio />
       </div>
-    </main>
+    </>
   );
 }

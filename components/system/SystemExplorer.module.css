@@ -1,0 +1,324 @@
+.system {
+  position: relative;
+  padding-bottom: clamp(72px, 10vh, 130px);
+}
+
+/* ---------------- 3D stage ---------------- */
+
+.stage {
+  position: relative;
+  height: min(62vh, 560px);
+  min-height: 380px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.stageOverlay {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(20px, 4vw, 44px) clamp(20px, 6vw, 80px);
+  pointer-events: none;
+}
+
+.domainRail {
+  display: flex;
+  gap: clamp(6px, 1.4vw, 18px);
+  pointer-events: auto;
+  flex-wrap: wrap;
+}
+
+.domainTab {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 9px 2px;
+  border-bottom: 1px solid transparent;
+  color: var(--ink-3);
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.domainTab:hover {
+  color: var(--ink-1);
+}
+
+.domainTabActive {
+  color: var(--ink-0);
+  border-bottom-color: var(--signal);
+}
+
+.domainIndex {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--signal);
+}
+
+.domainName {
+  font-size: clamp(13px, 1.5vw, 16px);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+}
+
+.premise {
+  max-width: 46ch;
+  font-size: clamp(14px, 1.6vw, 18px);
+  line-height: 1.6;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+/* ---------------- flow ---------------- */
+
+.flow {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: clamp(26px, 4vh, 44px) 0 clamp(20px, 3vh, 30px);
+}
+
+.flowItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.flowArrow {
+  color: var(--ink-4);
+  font-size: 12px;
+  user-select: none;
+}
+
+.stageBtn {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 13px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-align: left;
+  color: var(--ink-2);
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.stageBtn:hover,
+.stageBtn:focus-visible {
+  color: var(--ink-0);
+  border-color: var(--ink-4);
+}
+
+.stageBtnRelated {
+  border-color: color-mix(in srgb, var(--signal) 40%, transparent);
+}
+
+.stageBtnActive {
+  color: var(--ink-0);
+  border-color: var(--signal);
+  background: color-mix(in srgb, var(--signal) 8%, transparent);
+}
+
+.stageKind {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.stageBtnActive .stageKind {
+  color: var(--signal);
+}
+
+.stageLabel {
+  font-size: 13.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ---------------- detail ---------------- */
+
+.detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  gap: clamp(28px, 5vw, 72px);
+  padding-top: clamp(24px, 4vh, 38px);
+  border-top: 1px solid var(--rule);
+}
+
+.detailTitle {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink-0);
+}
+
+.detailRole {
+  margin-top: 8px;
+  font-size: clamp(15px, 1.7vw, 18px);
+  line-height: 1.6;
+  color: var(--ink-1);
+  max-width: 54ch;
+}
+
+.evidence {
+  margin-top: 18px;
+  padding-left: 16px;
+  border-left: 2px solid var(--signal);
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  max-width: 60ch;
+}
+
+/* Unverified content is visibly marked rather than quietly shipped. */
+.evidencePlaceholder {
+  border-left-color: var(--warn);
+  color: var(--ink-3);
+  font-style: italic;
+}
+
+.techList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-top: 20px;
+  list-style: none;
+}
+
+.tech {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+
+.tech::before {
+  content: "· ";
+  color: var(--ink-4);
+}
+
+.sideLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 10px;
+}
+
+.sideLabel:not(:first-child) {
+  margin-top: 24px;
+}
+
+.connList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.conn {
+  display: grid;
+  grid-template-columns: 62px 12px 1fr;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.connKind {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--signal);
+}
+
+.connDir {
+  color: var(--ink-4);
+  font-size: 11px;
+}
+
+.connTarget {
+  text-align: left;
+  font-size: 13.5px;
+  color: var(--ink-2);
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.connTarget:hover {
+  color: var(--ink-0);
+  border-bottom-color: var(--ink-4);
+}
+
+.connHop {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-left: 7px;
+}
+
+.projectLink {
+  font-size: 13.5px;
+  color: var(--ink-1);
+  border-bottom: 1px solid var(--rule);
+}
+
+.projectLink:hover {
+  color: var(--signal);
+  border-bottom-color: var(--signal);
+}
+
+/* ---------------- responsive ---------------- */
+
+@media (max-width: 900px) {
+  /* Mobile gets a purpose-built composition, not a squeezed 3D scene. */
+  .stage {
+    height: auto;
+    min-height: 0;
+  }
+
+  .stageOverlay {
+    padding: clamp(24px, 7vw, 40px) 0;
+    gap: 20px;
+  }
+
+  .domainRail {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 18px;
+  }
+
+  .flow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .flowItem {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .flowArrow {
+    transform: rotate(90deg);
+    padding: 3px 0;
+    align-self: flex-start;
+    margin-left: 18px;
+  }
+
+  .stageBtn {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .detail {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}

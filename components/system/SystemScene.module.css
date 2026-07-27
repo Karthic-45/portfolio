@@ -1,0 +1,18 @@
+.scene {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scene canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* The 3D layer is supporting context, never the only carrier of meaning. */
+@media (max-width: 900px) {
+  .scene {
+    display: none;
+  }
+}

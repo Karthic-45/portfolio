@@ -1,0 +1,150 @@
+.identity {
+  position: relative;
+  padding: clamp(70px, 14vh, 150px) 0 clamp(40px, 7vh, 80px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-areas:
+    "name  roles"
+    "pos   roles"
+    "act   roles";
+  gap: clamp(18px, 3vw, 34px) clamp(32px, 6vw, 90px);
+  align-items: start;
+}
+
+.nameBlock { grid-area: name; }
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--signal);
+  animation: breathe 2.6s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+.name {
+  margin-top: 16px;
+  font-size: clamp(44px, 8.5vw, 116px);
+  font-weight: 600;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  color: var(--ink-0);
+}
+
+/* Roles read as layers of one architecture, not three separate titles. */
+.roles {
+  grid-area: roles;
+  list-style: none;
+  border-left: 1px solid var(--rule);
+  padding-left: clamp(18px, 2.5vw, 30px);
+}
+
+.role {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 4px 12px;
+  padding: clamp(11px, 1.6vh, 16px) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.role:last-child { border-bottom: none; }
+
+.roleIndex {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--signal);
+  padding-top: 4px;
+}
+
+.roleName {
+  font-size: clamp(15px, 1.8vw, 19px);
+  font-weight: 500;
+  color: var(--ink-0);
+  letter-spacing: -0.01em;
+}
+
+.roleLayer {
+  grid-column: 2;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+}
+
+.positioning {
+  grid-area: pos;
+  max-width: 44ch;
+  font-size: clamp(15px, 1.9vw, 20px);
+  line-height: 1.55;
+  color: var(--ink-1);
+  text-wrap: pretty;
+}
+
+.actions {
+  grid-area: act;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 18px;
+  border-radius: 3px;
+  font-size: 14px;
+  border: 1px solid var(--rule);
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.primary {
+  border-color: var(--signal);
+  color: var(--ink-0);
+  background: color-mix(in srgb, var(--signal) 12%, transparent);
+}
+
+.primary:hover {
+  background: color-mix(in srgb, var(--signal) 22%, transparent);
+}
+
+.secondary { color: var(--ink-2); }
+.secondary:hover { color: var(--ink-0); border-color: var(--ink-4); }
+
+.kbd {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 6px;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--ink-3);
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: "name" "roles" "pos" "act";
+    gap: 26px;
+  }
+  .roles { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); }
+}

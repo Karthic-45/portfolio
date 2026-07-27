@@ -1,0 +1,43 @@
+.shell { position: relative; }
+
+/* Always-available recruiter escape hatch. */
+.quickPill {
+  position: fixed;
+  right: clamp(14px, 2.5vw, 28px);
+  bottom: clamp(14px, 2.5vw, 28px);
+  z-index: 120;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 15px;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+  background: rgba(12, 14, 18, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 13px;
+  color: var(--ink-1);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.quickPill:hover { color: var(--ink-0); border-color: var(--signal); }
+
+.quickDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--signal);
+}
+
+.quickKbd {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 6px;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--ink-3);
+}
+
+@media (max-width: 620px) {
+  .quickKbd { display: none; }
+}

@@ -1,0 +1,110 @@
+.section {
+  padding: clamp(72px, 11vh, 132px) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.head { margin-bottom: clamp(40px, 6vh, 64px); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+.heading {
+  margin-top: 14px;
+  font-size: clamp(26px, 3.6vw, 42px);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: var(--ink-0);
+  max-width: 24ch;
+  text-wrap: balance;
+}
+
+.list { list-style: none; }
+
+.era {
+  display: grid;
+  grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 64px);
+  padding: clamp(26px, 4vh, 40px) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.eraMeta { display: flex; flex-direction: column; gap: 16px; }
+
+.period {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+}
+
+.periodPlaceholder { color: var(--warn); font-style: italic; }
+
+/* Topology grows era over era — the visual seniority signal. */
+.diagram { display: flex; align-items: center; }
+
+.diagramNode { display: flex; align-items: center; }
+
+.diagramLink { width: 14px; height: 1px; background: var(--rule); }
+
+.diagramBox {
+  width: 13px;
+  height: 13px;
+  border: 1px solid var(--signal);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--signal) 16%, transparent);
+}
+
+.eraTitle {
+  font-size: clamp(19px, 2.3vw, 25px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink-0);
+}
+
+.eraOrg { margin-top: 5px; font-size: 13.5px; color: var(--ink-3); }
+
+.facts {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 14px;
+  align-items: baseline;
+}
+
+.factLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.factText {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: 62ch;
+}
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 18px; list-style: none; }
+
+.tag { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); }
+.tag::before { content: "· "; color: var(--ink-4); }
+
+@media (max-width: 780px) {
+  .era { grid-template-columns: 1fr; gap: 18px; }
+  .eraMeta { flex-direction: row; align-items: center; justify-content: space-between; }
+  .fact { grid-template-columns: 1fr; gap: 4px; }
+}

@@ -1,12 +1,10 @@
-.main {
+/*
+ * The system layer sits above the fixed video intro. Opaque from its top edge
+ * so the intro cannot ghost through once it is scrolled past.
+ */
+.system {
   position: relative;
-  background: var(--bg-black);
-}
-
-.content {
-  position: relative;
-  z-index: 1;
-  border-radius: 32px 32px 0 0;
-  background: var(--bg-black-soft);
-  box-shadow: 0 -60px 80px -20px rgba(0, 0, 0, 0.7);
+  z-index: 2;
+  background: var(--bg-0);
+  border-top: 1px solid var(--rule);
 }

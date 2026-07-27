@@ -18,7 +18,13 @@
       "Bash(GIT_TERMINAL_PROMPT=0 timeout 15 git push --dry-run origin main)",
       "Bash(echo \"exit: $?\")",
       "Bash(git checkout *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(sed -i '230s/push\\(\"input\"/echo\\(\"input\"/' components/Workspace/Terminal.tsx)",
+      "Bash(sed -i '240,373s/\\\\bpush\\(/emit\\(/g' components/Workspace/Terminal.tsx)",
+      "Bash(sed -i '393s/\\\\bpush\\(/emit\\(/' components/Workspace/Terminal.tsx)",
+      "Bash(sed -i '374s/\\\\[history, onOpenFile, push\\\\]/[history, onOpenFile, echo, emit, drain]/' components/Workspace/Terminal.tsx)",
+      "Bash(python3 -)",
+      "Bash(node -e \"const p=require\\('./package.json'\\);console.log\\(JSON.stringify\\({...p.dependencies,...p.devDependencies},null,1\\)\\)\")"
     ]
   }
 }

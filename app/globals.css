@@ -1,26 +1,30 @@
 :root {
-  --bg-black: #08090b;
-  --bg-black-soft: #0d0f12;
+  --bg-0: #08090b;
+  --bg-1: #0c0e12;
 
-  --accent: #0a84ff;
-  --accent-dim: rgba(10, 132, 255, 0.5);
-  --accent-glow: rgba(10, 132, 255, 0.35);
+  /* Ink scale: 0 = primary text, 4 = faintest structural detail. */
+  --ink-0: #f2f4f7;
+  --ink-1: rgba(242, 244, 247, 0.78);
+  --ink-2: rgba(242, 244, 247, 0.6);
+  --ink-3: rgba(242, 244, 247, 0.44);
+  --ink-4: rgba(242, 244, 247, 0.26);
 
-  --text-primary: #f2f4f7;
-  --text-muted: rgba(242, 244, 247, 0.64);
-  --text-faint: rgba(242, 244, 247, 0.4);
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-highlight: rgba(255, 255, 255, 0.08);
+  --rule: rgba(242, 244, 247, 0.12);
+  --signal: #0a84ff;
+  --warn: #f0a072;
 
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+
+  --measure: 1240px;
+  --gutter: clamp(20px, 6vw, 80px);
 }
 
 html {
   height: 100%;
   color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 html,
@@ -31,8 +35,8 @@ body {
 
 body {
   min-height: 100%;
-  color: var(--text-primary);
-  background: var(--bg-black);
+  color: var(--ink-0);
+  background: var(--bg-0);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -57,23 +61,45 @@ button {
   cursor: pointer;
 }
 
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+/* Visible only to screen readers, and to keyboard users on focus. */
+.skipLink {
+  position: absolute;
+  left: -9999px;
+  top: 12px;
+  z-index: 200;
+  padding: 10px 16px;
+  background: var(--bg-1);
+  border: 1px solid var(--signal);
+  border-radius: 3px;
+}
+
+.skipLink:focus {
+  left: 12px;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
   }
-}
-
-/* ---------- shared layout utilities ---------- */
-
-.container {
-  width: 100%;
-  max-width: 1220px;
-  margin: 0 auto;
-  padding-left: clamp(20px, 6vw, 80px);
-  padding-right: clamp(20px, 6vw, 80px);
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
+import { gsap } from "@/lib/gsap";
 import CinematicLayer from "../CinematicLayer/CinematicLayer";
 import styles from "./VideoIntro.module.css";
 
@@ -58,6 +58,7 @@ function UnmutedIcon() {
 
 export default function VideoIntro() {
   const heroRef = useRef<HTMLElement>(null);
+  const spacerRef = useRef<HTMLDivElement>(null);
   const fgWrapRef = useRef<HTMLDivElement>(null);
   const bgVideoRef = useRef<HTMLVideoElement>(null);
   const fgVideoRef = useRef<HTMLVideoElement>(null);
@@ -116,6 +117,45 @@ export default function VideoIntro() {
         )
         .to(controlsRef.current, { opacity: 1, duration: prefersReducedMotion ? 0.01 : 0.7 }, 1.35)
         .to(scrollRef.current, { opacity: 1, duration: prefersReducedMotion ? 0.01 : 0.7 }, 1.5);
+
+      // Scroll-scrubbed 3D exit: the hero tilts back and recedes like a lid
+      // closing while the workspace rises over it.
+      if (!prefersReducedMotion) {
+        // fromTo with an explicit `from` (rather than `to`) so the tween can't
+        // capture the entrance fade's in-flight opacity and clobber it, and
+        // immediateRender:false so it stays dormant until the user scrolls.
+        // The hero must reach opacity 0 — it's fixed, so anything left visible
+        // ghosts through the translucent sections below it.
+        gsap.fromTo(
+          heroRef.current,
+          {
+            opacity: 1,
+            rotateX: 0,
+            scale: 1,
+            yPercent: 0,
+            filter: "blur(0px) brightness(1)",
+          },
+          {
+            opacity: 0,
+            rotateX: 12,
+            scale: 0.86,
+            yPercent: -6,
+            filter: "blur(5px) brightness(0.45)",
+            ease: "none",
+            transformPerspective: 1400,
+            transformOrigin: "50% 100%",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: spacerRef.current,
+              start: "top top",
+              // Fully gone a little before the spacer ends so nothing bleeds
+              // into the first content section.
+              end: "bottom 25%",
+              scrub: 0.6,
+            },
+          }
+        );
+      }
     }, heroRef);
 
     return () => ctx.revert();
@@ -153,7 +193,7 @@ export default function VideoIntro() {
 
   const scrollToNext = () => {
     document
-      .getElementById("workspace")
+      .getElementById("profile")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -273,7 +313,7 @@ export default function VideoIntro() {
         </button>
       </section>
 
-      <div className={styles.heroSpacer} aria-hidden="true" />
+      <div className={styles.heroSpacer} ref={spacerRef} aria-hidden="true" />
     </>
   );
 }
