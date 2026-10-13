@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { gsap } from "@/lib/gsap";
 import styles from "./Cursor.module.css";
 
-const INTERACTIVE_SELECTOR = "a, button, [data-cursor-hover]";
+const INTERACTIVE_SELECTOR = "a, button, input, [data-cursor-hover]";
 
 function subscribeToCapability(callback: () => void) {
   const pointerQuery = window.matchMedia("(pointer: fine)");
