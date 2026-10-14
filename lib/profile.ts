@@ -18,7 +18,7 @@ export const PROFILE = {
     "Backend developer working in Java and Spring Boot across REST APIs, microservices and distributed systems, with production experience wiring Generative AI — RAG pipelines and document intelligence — into enterprise backends, and hands-on IoT work from sensors through to control loops.",
 };
 
-export const EMAIL = "karthicnandakumar4545@gmail.com";
+export const EMAIL = "mail@karthic.dev";
 export const PHONE_DISPLAY = "+91 89400 51266";
 export const PHONE_HREF = "tel:+918940051266";
 export const GITHUB = "https://github.com/Karthic-45";

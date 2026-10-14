@@ -549,13 +549,365 @@
   }
 }
 
+/* ---------- top telemetry & direct transmission bar ---------- */
+
+.topBar {
+  position: absolute;
+  top: clamp(20px, 3.8vh, 36px);
+  left: clamp(24px, 7vw, 90px);
+  right: clamp(24px, 7vw, 90px);
+  z-index: 25;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.systemStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(14, 16, 22, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  pointer-events: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #30d158;
+  box-shadow: 0 0 8px #30d158;
+  animation: pulseDot 1.8s ease-in-out infinite;
+}
+
+.statusText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--text-muted, rgba(245, 245, 247, 0.74));
+  text-transform: uppercase;
+}
+
+.topMailBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(14, 18, 28, 0.75);
+  border: 1px solid rgba(10, 132, 255, 0.32);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  pointer-events: auto;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.45),
+    0 0 16px rgba(10, 132, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.topMailBadge:hover {
+  background: rgba(18, 26, 42, 0.9);
+  border-color: rgba(10, 132, 255, 0.7);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(10, 132, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.topMailBadge:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.topMailBadge .iconSvg {
+  width: 15px;
+  height: 15px;
+  color: var(--accent, #0a84ff);
+}
+
+.topMailText {
+  color: #f5f5f7;
+  font-weight: 500;
+}
+
+.topTransmitTag {
+  color: var(--accent, #0a84ff);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  padding-left: 2px;
+}
+
+/* ---------- hero mail transmission cta ---------- */
+
+.ctaWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(6px, 1.2vh, 12px);
+  pointer-events: auto;
+  opacity: 0;
+}
+
+.transmitBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-radius: 16px;
+  background: rgba(14, 18, 28, 0.82);
+  border: 1px solid rgba(10, 132, 255, 0.4);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.6),
+    0 0 28px rgba(10, 132, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+}
+
+.transmitBtn:hover {
+  background: rgba(18, 28, 48, 0.92);
+  border-color: rgba(10, 132, 255, 0.85);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.7),
+    0 0 36px rgba(10, 132, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.transmitBtn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.transmitBtn:focus-visible {
+  outline: 2px solid var(--accent, #0a84ff);
+  outline-offset: 3px;
+}
+
+.transmitBtnActive {
+  background: rgba(10, 132, 255, 0.25) !important;
+  border-color: rgba(10, 132, 255, 1) !important;
+  box-shadow:
+    0 0 40px rgba(10, 132, 255, 0.5),
+    inset 0 0 20px rgba(10, 132, 255, 0.3) !important;
+}
+
+.transmitIconWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(10, 132, 255, 0.18);
+  border: 1px solid rgba(10, 132, 255, 0.45);
+  color: var(--accent, #0a84ff);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.transmitBtn:hover .transmitIconWrap {
+  transform: scale(1.06);
+  background: rgba(10, 132, 255, 0.28);
+  border-color: rgba(10, 132, 255, 0.7);
+}
+
+.transmitPulseRadar {
+  position: absolute;
+  inset: -4px;
+  border-radius: 14px;
+  border: 1px solid rgba(10, 132, 255, 0.6);
+  animation: radarPulse 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes radarPulse {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.transmitContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.transmitHeader {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.transmitLiveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #30d158;
+  box-shadow: 0 0 6px #30d158;
+  animation: pulseDot 1.6s ease-in-out infinite;
+}
+
+.transmitStatus {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent, #0a84ff);
+  text-transform: uppercase;
+}
+
+.transmitEmailAddress {
+  font-family: var(--font-mono);
+  font-size: clamp(14px, 1.25vw, 17px);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.transmitArrowWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(245, 245, 247, 0.85);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.transmitBtn:hover .transmitArrowWrap {
+  color: #ffffff;
+  background: rgba(10, 132, 255, 0.35);
+  border-color: rgba(10, 132, 255, 0.7);
+  transform: translate(2px, -2px);
+  box-shadow: 0 0 14px rgba(10, 132, 255, 0.45);
+}
+
+.copyBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 68px;
+  padding: 0 18px;
+  border-radius: 16px;
+  background: rgba(14, 16, 22, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  color: rgba(245, 245, 247, 0.85);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+.copyBtn:hover {
+  background: rgba(22, 28, 40, 0.9);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+}
+
+.copyBtn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.copyBtnSuccess {
+  background: rgba(48, 209, 88, 0.18) !important;
+  border-color: rgba(48, 209, 88, 0.55) !important;
+  color: #30d158 !important;
+  box-shadow: 0 0 20px rgba(48, 209, 88, 0.3) !important;
+}
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 768px) {
+  .topBar {
+    top: clamp(14px, 2.5vh, 20px);
+    left: clamp(16px, 4vw, 24px);
+    right: clamp(16px, 4vw, 24px);
+  }
+
+  .systemStatus {
+    display: none;
+  }
+
+  .topMailBadge {
+    padding: 5px 12px;
+    font-size: 11px;
+    margin-left: auto;
+  }
+
   .content {
     bottom: clamp(100px, 16vh, 140px);
     left: clamp(20px, 5vw, 32px);
     right: clamp(20px, 5vw, 32px);
+  }
+
+  .ctaWrap {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .transmitBtn {
+    width: 100%;
+    padding: 10px 14px;
+    gap: 12px;
+  }
+
+  .transmitIconWrap {
+    width: 38px;
+    height: 38px;
+  }
+
+  .copyBtn {
+    width: 100%;
+    height: 42px;
+    padding: 8px 14px;
   }
 
   .controls {
@@ -600,5 +952,9 @@
   .controls {
     bottom: 16px;
     right: 16px;
+  }
+
+  .topBar {
+    display: none;
   }
 }
