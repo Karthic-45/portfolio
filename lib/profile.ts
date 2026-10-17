@@ -7,7 +7,7 @@
  */
 
 export const PROFILE = {
-  name: "Karthic N",
+  name: "Sabari Anandan",
   roles: ["Backend Developer", "Cloud Architect", "IoT Engineer"],
   location: "Tamil Nadu, India",
   availability: "Open to backend, cloud and applied-GenAI roles",
